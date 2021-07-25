@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/main.css" type="text/css">
+    <title>Node JS Server</title>
+</head>
+<body>
+    <nav class="navbar">
+        <a class="navbar-brand" href="/">NodeJS Basics</a>
+    </nav>
+    
+    <div id="nicknameBox">
+        <div class="container" id="mainPage">
+            <div class="box">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Enter a Nickname</h4>
+                    </div>
+                    <form id="nickname-form" class="card-footer">
+                        <div class="input-group">
+                            <input type="text" placeholder="Enter a nickname" class="form-control" id="nickname">
+                            <input type="submit" class="btn btn-success">
+                        </div>
+                    </form> 
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="chatBox">
+        <div class="box">
+            <div class="card">
+
+                <div class="card-header">
+                    <h4>Chat</h4>
+                </div>
+
+                <div class="chat-wrapper">
+                    <div id="chat" class="card-body"></div>
+                    <div class="usersBox">
+                        <div class="users-header"><h5>Online</h5></div>
+                        <div id="users"></div>
+                    </div>
+                </div>
+
+                <form id="message-form" class="card-footer">
+                        <div class="input-group">
+                            <input type="text" placeholder="Escribe un mensaje..." id="message" class="form-control">
+                            <input type="submit" class="btn btn-success">
+                        </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js" charset="utf-8"></script>
+    <script src="js/main.js" type="text/javascript" charset="utf-8"></script>
+</body>
+</html>
