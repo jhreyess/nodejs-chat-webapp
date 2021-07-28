@@ -4,7 +4,6 @@ document.addEventListener("DOMContentLoaded", function(){
 
     const chatBox = document.getElementById('chatBox');
     const mainPage = document.getElementById('mainPage');
-    chatBox.style.display = 'none';
 
     //obtaining DOM elements from the interface
     const nicknameForm = document.getElementById('nickname-form');

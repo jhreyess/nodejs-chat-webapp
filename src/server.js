@@ -7,8 +7,10 @@ const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
 
+const host = "192.168.1.80";
+
 //settings
-app.set('port', process.env.PORT || 8000);
+app.set('port', process.env.PORT || 8080);
 
 //web sockets
 require('./sockets.js')(io);
@@ -21,7 +23,7 @@ server.listen(app.get('port'), (error)=>{
     if(error){
         console.log(error);
     }else{
-        console.log(`[server] Server running at port:${app.get('port')}`);
+        console.log(`[server] Server running at ${host}:${app.get('port')}`);
     }
 });
 
