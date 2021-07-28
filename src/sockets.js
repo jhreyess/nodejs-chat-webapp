@@ -18,7 +18,7 @@ module.exports = function(io){
         }); 
 
         socket.on('send message', data =>{
-            io.sockets.emit('new message', {
+            socket.broadcast.emit('new message', {
                 msg: data,
                 user: socket.nickname
             });

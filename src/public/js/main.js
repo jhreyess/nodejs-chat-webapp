@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function(){
     const nicknameBox = document.getElementById('nickname');
 
     const messageForm = document.getElementById('message-form');
-    const messageBox = document.getElementById('message');
+    const messageBox = document.getElementById('message-input');
     const chat = document.getElementById('chat');
     const users = document.getElementById('users');
     
@@ -33,38 +33,40 @@ document.addEventListener("DOMContentLoaded", function(){
     messageForm.addEventListener("submit", (e) => {
         e.preventDefault();
         if(messageBox.value && messageBox.value.trim()!=="" ){
+            messageBox.value = messageBox.value.replaceAll("&", "&amp").replaceAll("<", "&lt").replaceAll(">", "&gt");
+            let shouldScroll = Math.round(chat.scrollTop)+chat.clientHeight === chat.scrollHeight;
+            chat.innerHTML += `<div class="message sent"><p>`+messageBox.value+'</p></message>';
             socket.emit('send message', messageBox.value);
+            if(shouldScroll){ scrollToBottom(); }
             messageBox.value="";
         }
     });
 
-    socket.on('conected', nick => {
-        chat.innerHTML += `<span>${nick} has joined the chat group!<span/><br/>`;
+    socket.on('conected', (nick) => {
+        chat.innerHTML += `<div class="message"><span>${nick} has joined the chat group!<span/></div>`;
     });
 
-    socket.on('disconected', nick => {
-        chat.innerHTML += `<span>${nick} has left the chat!</span><br/>`;
+    socket.on('disconected', (nick) => {
+        chat.innerHTML += `<div class="message"><span>${nick} has left the chat!</span></div>`;
     });
 
-    socket.on('usernames', nicks => {
+    socket.on('usernames', (nicks) => {
         let html = '';
         nicks.forEach(nick => {
-            html += `<h5 class="onlineUser">${nick}</h5>`;
+            html += `<div class="onlineUser"><div class="onlineIcon"></div><h5>${nick}</h5></div>`;
         });
         users.innerHTML = html;
     });
 
     socket.on('new message', (data)=>{
-        let shouldScroll = chat.scrollTop + chat.clientHeight == chat.scrollHeight;
-        chat.innerHTML += `<strong>${data.user}:</strong> ${data.msg}<br/>`;
-        if(!shouldScroll){
-            scrollToBottom();
-        }
-
-    })
+        console.log("testing");
+        let shouldScroll = Math.round(chat.scrollTop)+chat.clientHeight === chat.scrollHeight;
+        chat.innerHTML += `<div class="message"><strong>${data.user}</strong><p>`+data.msg+'</p></message>';
+        if(shouldScroll){ scrollToBottom(); }
+    });
 });
 
 function scrollToBottom(){
     const chat = document.getElementById('chat');
-    chat.scrollTop = chat.scrollHeight;
+    chat.scrollTop = chat.scrollHeight - chat.clientHeight;
 }

@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/main.css" type="text/css">
     <title>Node JS Server</title>
@@ -19,9 +18,9 @@
                     <div class="card-header">
                         <h4>Enter a Nickname</h4>
                     </div>
-                    <form id="nickname-form" class="card-footer">
-                        <div class="input-group">
-                            <input type="text" placeholder="Enter a nickname" class="form-control" id="nickname">
+                    <form id="nickname-form" class="card-footer" style="border: 0">
+                        <div class="input-group mobile-input-group">
+                            <input type="text" placeholder="Enter a nickname" maxlength="10" class="form-control" id="nickname" autocomplete="off">
                             <input type="submit" class="btn btn-success">
                         </div>
                     </form> 
@@ -48,8 +47,8 @@
 
                 <form id="message-form" class="card-footer">
                         <div class="input-group">
-                            <input type="text" placeholder="Escribe un mensaje..." id="message" class="form-control">
-                            <input type="submit" class="btn btn-success">
+                            <input type="text" placeholder="Escribe un mensaje..." id="message-input" class="form-control" autocomplete="off">
+                            <input type="submit" class="btn btn-success" value=">">
                         </div>
                 </form>
 
