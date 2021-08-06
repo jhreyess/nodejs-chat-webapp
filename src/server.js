@@ -7,7 +7,7 @@ const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
 
-const host = "192.168.1.80";
+const host = "192.168.1.73"; //Local ipv4 add
 
 //settings
 app.set('port', process.env.PORT || 8080);
@@ -19,7 +19,7 @@ require('./sockets.js')(io);
 app.use(express.static(path.join(__dirname, 'public')));
 
 //starting the server
-server.listen(app.get('port'), (error)=>{
+server.listen(app.get('port'), host, (error)=>{
     if(error){
         console.log(error);
     }else{
